@@ -27,26 +27,29 @@
     </header>
     <main class="mdl-layout__content">
       <div class="right-image">
-        <img src="./images/income_tax.jpg" alt="tax image" width="250" />
+        <img src="./images/income_tax.jpg" alt="income" />
       </div>
-      <div class="page-content-php">
+      <div class="page-content">
         <div id="user-info">
           <?php
-          $hoursWorked = $_GET["hours-worked"];
-          $hourlyWage = $_GET["hourly-wage"];
+          $TAX_RATE = 0.18;
+          $hoursWorked = $_GET["hours"];
+          $hourlyWage = $_GET["rate"];
 
           // Process
-          $pay = ($hoursWorked * $hourlyWage) * (1 - 0.18);
-          $tax = ($hoursWorked * $hourlyWage) * 0.18;
+          $taxes = ($hoursWorked * $hourlyWage) * $TAX_RATE;
+          $takeHomeSalary = $hourlyWage * $hoursWorked - $taxes;
 
           // Output
-          echo "Your pay will be: $"  . (round($pay, 2)) . "";
+          echo "Your pay will be: $" . (round($takeHomeSalary, 2));
           echo "<br />";
-          echo "<br />";
-          echo "The government will take: $" . (round($tax, 2)) . "";
+          echo "The government will take: $" . (round($taxes, 2));
           ?>
         </div>
-      </div>
+        <br />
+        <div class="page-content-answer">
+          <a href="./index.php">Return ...</a>
+        </div>
     </main>
   </div>
 </body>
